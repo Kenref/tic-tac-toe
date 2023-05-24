@@ -1,0 +1,9 @@
+#game-board {
+    display: grid;
+    grid-template-columns: repeat(3, 200px);
+    grid-template-rows: repeat(3, 200px);
+}
+
+.square {
+    border: solid red 1px;
+}
