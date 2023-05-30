@@ -64,15 +64,20 @@ const gameController = (function() {
 
     function playTurn(location) {
         if (activePlayer == 1) {
+            let marker = "X"
             player1.placeMarker(location)
+            gameBoard.squares[location - 1].textContent = marker
         } else {
+            let marker = "O"
             player2.placeMarker(location)
+            gameBoard.squares[location - 1].textContent = O;
+
         }
-        console.log(gameBoard.grid);
+        // console.log(gameBoard.grid);
         checkWin()
         switchPlayerTurn()
-
     }
+
 
     function checkWin() {
         let winningNumbers = [
@@ -86,25 +91,33 @@ const gameController = (function() {
             [3, 5, 7],
         ];
         let grid = gameBoard.grid;
-
         for (let i = 0; i < winningNumbers.length; i++) {
             let [a, b, c] = winningNumbers[i];
-
             if (grid[a - 1] === "X" && grid[b - 1] === "X" && grid[c - 1] === "X") {
                 console.log("Player 1 wins!");
                 return;
             }
-
             if (grid[a - 1] === "O" && grid[b - 1] === "O" && grid[c - 1] === "O") {
                 console.log("Player 2 wins!");
                 return;
             }
         }
-
-        // console.log("No winner yet.");
     }
 
+    function placeMarkerOnBoard(e, marker) {
+        e.target.textContent = marker
+    }
 
+    for (let i = 0; i < gameBoard.squares.length; i++) {
+        gameBoard.squares[i].addEventListener("click", function (e) {
+            if (activePlayer === 1) {
+                placeMarkerOnBoard(e, "X")
+            }
+            else {
+                placeMarkerOnBoard(e, "O")
+            }
+        })        
+    }
 
 
 
@@ -129,7 +142,7 @@ const gameController = (function() {
 
 
     return {
-
+        placeMarkerOnBoard
     }
 })();
 
