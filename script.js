@@ -22,8 +22,8 @@ const gameBoard = (function () {
 
 //factory----------------------
 function playerFactory(playerNumber, marker) {
-    function placeMarker(position, marker) {
-        gameBoard.grid.splice(position, 1, marker);
+    function placeMarker(position) {
+        gameBoard.grid.splice((position - 1), 1, marker);
     }
 
     return {
@@ -39,18 +39,16 @@ const gameController = (function() {
         if ((Math.floor(Math.random() * 2) + 1) == 1) {
             console.log("player 1 is starting")
             let firstPlayer = 1
-            let secondPlayer = 2
-            return { firstPlayer, secondPlayer }
+            return firstPlayer
         } else {
-            console.log("Playeer 2 is starting")
+            console.log("Player 2 is starting")
             let firstPlayer = 2
-            let secondPlayer = 1
-            return { firstPlayer, secondPlayer }
+            return firstPlayer
         }
     }
 
     function switchPlayerTurn() {
-        if (activePlayer == 1) {
+        if (activePlayer === 1) {
             activePlayer = 2
             return activePlayer
         } else {
@@ -59,8 +57,8 @@ const gameController = (function() {
         }
     }
 
-    function setActivePlayer() {
-        if (firstPlayer == 1) {
+    function setActivePlayer(firstPlayer) {
+        if (firstPlayer === 1) {
             let activePlayer = 1
             return activePlayer
         } else {
@@ -69,47 +67,62 @@ const gameController = (function() {
         }
     }
 
-    //check player win: if either player has 123, 456, 789, 147, 258, 369, 159, 357 in any order. try using an array for each player
+    function playTurn(location) {
+        if (activePlayer == 1) {
+            player1.placeMarker(location)
+        } else {
+            player2.placeMarker(location)
+        }
+        checkWin()
+        switchPlayerTurn()
+        console.log(gameBoard.grid)
+    }
+
+    function checkWin(marker) {
+        let winningNumbers = [123, 456, 789, 147, 258, 369, 159, 357]
+        let grid = gameBoard.grid
+
+        if (grid.includes("X", 8, 8)) {
+            console.log("winner is x")
+        }
+        
+
+
+            
+    }
 
 
 
 
-    let {firstPlayer, secondPlayer} = startingPlayer()
-    const player1 = playerFactory(firstPlayer, "X")
-    const player2 = playerFactory(secondPlayer, "O")
-    let activePlayer = setActivePlayer()
 
-
-
- 
+    let firstPlayer = startingPlayer()
+    let player1 = playerFactory(firstPlayer, "X")
+    let player2 = playerFactory(firstPlayer === 1 ? 2 : 1, "O")
+    let activePlayer = setActivePlayer(firstPlayer)
 
 
     console.log(gameBoard.grid)
-    console.log(player1.playerNumber, player1.marker)
-    console.log(player2.playerNumber, player2.marker)
+    // playTurn(1)
+    // playTurn(5)
+    // playTurn(2)
+    // playTurn(7)
+    // playTurn(3)
 
-    player1.placeMarker(4, "X")
-    console.log(gameBoard.grid)
+
+
+
+ // if the array has either x or O then it cannot be changed at that specific spot
+
+
+
 
 
 
     return {
-
+        playTurn
     }
 })();
 
-
-
-
-
-// function calls
-// gameController.startingPlayer()
-// console.log(gameController.firstPlayer, "first player")
-// gameController.setActivePlayer()
-// console.log(gameController.activePlayer, "active player")
-
-// gameController.switchPlayerTurn(activePlayer)
-// console.log(gameController.activePlayer, "active")
 
 
 

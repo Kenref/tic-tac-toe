@@ -17,3 +17,5 @@
 
 
 /* player 1 is always x and player 2 is always o */
+/* while there are numbers in the array, play turn */
+/* or while no one has won yet */
