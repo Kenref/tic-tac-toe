@@ -2,11 +2,9 @@
 const gameBoard = (function () {
     "use strict";
     const squares = document.getElementsByClassName("square")
-    const grid = [
-        1, 2, 3,
-        4, 5, 6,
-        7, 8, 9
-    ];
+
+
+    const grid = [1,2,3,4,5,6,7,8,9];
 
 
     return {
@@ -74,6 +72,9 @@ const gameController = (function() {
         switchPlayerTurn()
     }
 
+    function isNoMoreNumbers() {
+        return gameBoard.grid.every(number => typeof number !== "number")
+    }
 
     function checkWin() {
         let winningNumbers = [
@@ -87,16 +88,21 @@ const gameController = (function() {
             [3, 5, 7],
         ];
         let grid = gameBoard.grid;
+        let winner = false
+
         for (let i = 0; i < winningNumbers.length; i++) {
             let [a, b, c] = winningNumbers[i];
             if (grid[a - 1] === "X" && grid[b - 1] === "X" && grid[c - 1] === "X") {
                 console.log("Player 1 wins!");
-                return;
+                winner = true
             }
-            if (grid[a - 1] === "O" && grid[b - 1] === "O" && grid[c - 1] === "O") {
+            else if (grid[a - 1] === "O" && grid[b - 1] === "O" && grid[c - 1] === "O") {
                 console.log("Player 2 wins!");
-                return;
+                winner = true
             }
+        }
+        if ((isNoMoreNumbers() == true) && (winner == false)) {
+            console.log("TIE")
         }
     }
 
@@ -108,9 +114,9 @@ const gameController = (function() {
 		}
 	}
 
-
-    for (let i = 0; i < gameBoard.squares.length; i++) {
-        gameBoard.squares[i].addEventListener("click", function (e) {
+    const squares = gameBoard.squares
+    for (let i = 0; i < squares.length; i++) {
+        squares[i].addEventListener("click", function (e) {
             if (activePlayer === 1) {
                 placeMarkerOnBoard(e, "X");
             } else {
@@ -129,12 +135,10 @@ const gameController = (function() {
 
 
     console.log(gameBoard.grid)
-    // playTurn(4)
 
 
 
 
- // if the array has either x or O then it cannot be changed at that specific spot
 
 
 
@@ -143,7 +147,8 @@ const gameController = (function() {
 
     return {
         placeMarkerOnBoard,
-        playTurn
+        playTurn,
+        isNoMoreNumbers,
     }
 })();
 
