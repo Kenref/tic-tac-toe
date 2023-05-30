@@ -1,31 +1,26 @@
 //module -----------------------
 const gameBoard = (function () {
     "use strict";
-
+    const squares = document.getElementsByClassName("square")
     const grid = [
         1, 2, 3,
         4, 5, 6,
         7, 8, 9
     ];
-    
-
 
 
     return {
-        grid,
-        
+        grid,  
+        squares
     }
-
-
-
 })();
+
 
 //factory----------------------
 function playerFactory(playerNumber, marker) {
     function placeMarker(position) {
         gameBoard.grid.splice((position - 1), 1, marker);
     }
-
     return {
         playerNumber,
         marker,
@@ -73,23 +68,42 @@ const gameController = (function() {
         } else {
             player2.placeMarker(location)
         }
+        console.log(gameBoard.grid);
         checkWin()
         switchPlayerTurn()
-        console.log(gameBoard.grid)
+
     }
 
-    function checkWin(marker) {
-        let winningNumbers = [123, 456, 789, 147, 258, 369, 159, 357]
-        let grid = gameBoard.grid
+    function checkWin() {
+        let winningNumbers = [
+            [1, 2, 3],
+            [4, 5, 6],
+            [7, 8, 9],
+            [1, 4, 7],
+            [2, 5, 8],
+            [3, 6, 9],
+            [1, 5, 9],
+            [3, 5, 7],
+        ];
+        let grid = gameBoard.grid;
 
-        if (grid.includes("X", 8, 8)) {
-            console.log("winner is x")
+        for (let i = 0; i < winningNumbers.length; i++) {
+            let [a, b, c] = winningNumbers[i];
+
+            if (grid[a - 1] === "X" && grid[b - 1] === "X" && grid[c - 1] === "X") {
+                console.log("Player 1 wins!");
+                return;
+            }
+
+            if (grid[a - 1] === "O" && grid[b - 1] === "O" && grid[c - 1] === "O") {
+                console.log("Player 2 wins!");
+                return;
+            }
         }
-        
 
-
-            
+        // console.log("No winner yet.");
     }
+
 
 
 
@@ -102,11 +116,7 @@ const gameController = (function() {
 
 
     console.log(gameBoard.grid)
-    // playTurn(1)
-    // playTurn(5)
-    // playTurn(2)
-    // playTurn(7)
-    // playTurn(3)
+    playTurn(4)
 
 
 
@@ -119,7 +129,7 @@ const gameController = (function() {
 
 
     return {
-        playTurn
+
     }
 })();
 
