@@ -18,13 +18,13 @@ const gameBoard = (function () {
 
 //factory----------------------
 function playerFactory(playerNumber, marker) {
-    function placeMarker(position) {
+    function placeMarkerInArray(position) {
         gameBoard.grid.splice((position - 1), 1, marker);
     }
     return {
         playerNumber,
         marker,
-        placeMarker
+        placeMarkerInArray
     }
 }
 
@@ -61,19 +61,15 @@ const gameController = (function() {
             return activePlayer
         }
     }
-
+    // add if there isnt already and o or x there
     function playTurn(location) {
         if (activePlayer == 1) {
-            let marker = "X"
-            player1.placeMarker(location)
-            gameBoard.squares[location - 1].textContent = marker
+            player1.placeMarkerInArray(location)
+            gameBoard.squares[location - 1].textContent = "X"
         } else {
-            let marker = "O"
-            player2.placeMarker(location)
-            gameBoard.squares[location - 1].textContent = O;
-
-        }
-        // console.log(gameBoard.grid);
+            player2.placeMarkerInArray(location)
+            gameBoard.squares[location - 1].textContent = "O";
+        }        
         checkWin()
         switchPlayerTurn()
     }
@@ -105,18 +101,22 @@ const gameController = (function() {
     }
 
     function placeMarkerOnBoard(e, marker) {
-        e.target.textContent = marker
-    }
+		if (e.target.textContent !== "X" && e.target.textContent !== "O") {
+			e.target.textContent = marker;
+			playTurn(e.target.classList[1]);
+			console.log(gameBoard.grid);
+		}
+	}
+
 
     for (let i = 0; i < gameBoard.squares.length; i++) {
         gameBoard.squares[i].addEventListener("click", function (e) {
             if (activePlayer === 1) {
-                placeMarkerOnBoard(e, "X")
+                placeMarkerOnBoard(e, "X");
+            } else {
+                placeMarkerOnBoard(e, "O");
             }
-            else {
-                placeMarkerOnBoard(e, "O")
-            }
-        })        
+        });
     }
 
 
@@ -129,7 +129,7 @@ const gameController = (function() {
 
 
     console.log(gameBoard.grid)
-    playTurn(4)
+    // playTurn(4)
 
 
 
@@ -142,7 +142,8 @@ const gameController = (function() {
 
 
     return {
-        placeMarkerOnBoard
+        placeMarkerOnBoard,
+        playTurn
     }
 })();
 
