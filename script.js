@@ -3,13 +3,24 @@ const gameBoard = (function () {
     "use strict";
     const squares = document.getElementsByClassName("square")
 
+    let grid = [
+        1, 2, 3,
+        4, 5, 6,
+        7, 8, 9];
 
-    const grid = [1,2,3,4,5,6,7,8,9];
+    function resetGame() {
+        for (let i = 0; i < squares.length; i++) {
+            squares[i].textContent = "";
+            grid[i] = i + 1
+        }
+        gameController.activateClick()
+    }
 
 
     return {
         grid,  
-        squares
+        squares,
+        resetGame
     }
 })();
 
@@ -89,7 +100,6 @@ const gameController = (function () {
             ) {
                 console.log(`Player ${activePlayer} Wins`);
                 winner = true;
-                //activeate the modal here
                 deactivateClick()
                 break;
             }
@@ -97,7 +107,6 @@ const gameController = (function () {
         if ((isNoMoreNumbers() == true) && (winner == false)) {
             console.log("TIE")
             deactivateClick()
-            //activate the modal here
         }
     }
 
@@ -109,20 +118,6 @@ const gameController = (function () {
     }
     
 
-    // function activateClick() {
-    //     const squares = gameBoard.squares
-    //     for (let i = 0; i < squares.length; i++) {
-    //         squares[i].addEventListener("click", function (e) {
-    //             if (activePlayer === 1) {
-    //                 placeMarkerOnBoard(e, getCurrentMarker());
-    //             } else {
-    //                 placeMarkerOnBoard(e, getCurrentMarker());
-    //             }
-    //         });
-    //     }
-    // }
-
-
     function activateClick() {
 		const squares = gameBoard.squares;
 		for (let i = 0; i < squares.length; i++) {
@@ -130,6 +125,7 @@ const gameController = (function () {
 		}
 	}
 
+    // make it so that the activateClick function can be called and deactivated from deactivateClick function
     function functionNamer(e) {
         placeMarkerOnBoard(e, getCurrentMarker())
     }
@@ -141,6 +137,9 @@ const gameController = (function () {
 			squares[i].removeEventListener("click", functionNamer)
 		}
 	}
+
+
+
 
     let firstPlayer = 1
     let activePlayer = firstPlayer
@@ -162,7 +161,8 @@ const gameController = (function () {
         playTurn,
         isNoMoreNumbers,
         activePlayer,
-        getCurrentMarker
+        getCurrentMarker,
+        activateClick
         
     }
 })();
@@ -171,11 +171,10 @@ const gameController = (function () {
 
 
 
-//need to find out how to activate and deactivate event listeners
 
 
 
-
+// game over = false - true when the game finishes and then option to restart the game
 
 
 
