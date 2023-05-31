@@ -40,6 +40,16 @@ const gameController = (function() {
         }
     }
 
+    function setActivePlayer(firstPlayer) {
+        if (firstPlayer === 1) {
+            let activePlayer = 1
+            return activePlayer
+        } else {
+            let activePlayer = 2
+            return activePlayer
+        }
+    }
+
     function switchPlayerTurn() {
         if (activePlayer === 1) {
             activePlayer = 2
@@ -50,15 +60,6 @@ const gameController = (function() {
         }
     }
 
-    function setActivePlayer(firstPlayer) {
-        if (firstPlayer === 1) {
-            let activePlayer = 1
-            return activePlayer
-        } else {
-            let activePlayer = 2
-            return activePlayer
-        }
-    }
     // add if there isnt already and o or x there
     function playTurn(location) {
         if (activePlayer == 1) {
@@ -71,6 +72,15 @@ const gameController = (function() {
         checkWin()
         switchPlayerTurn()
     }
+
+    // function getCurrentMarker() {
+    //     if (activePlayer === 1) {
+    //         activeMarker = "X"
+    //     } else {
+    //         activeMarker = "O"
+    //     }
+    //     return activeMarker
+    // }
 
     function isNoMoreNumbers() {
         return gameBoard.grid.every(number => typeof number !== "number")
@@ -89,6 +99,13 @@ const gameController = (function() {
         ];
         let grid = gameBoard.grid;
         let winner = false
+
+        // for (let combination of winningNumbers) {
+        //     let [a, b, c] = combination
+        //     if grid[a - 1] == "X"
+        // }
+
+
 
         for (let i = 0; i < winningNumbers.length; i++) {
             let [a, b, c] = winningNumbers[i];
@@ -119,8 +136,10 @@ const gameController = (function() {
         squares[i].addEventListener("click", function (e) {
             if (activePlayer === 1) {
                 placeMarkerOnBoard(e, "X");
+                console.log(activePlayer)
             } else {
                 placeMarkerOnBoard(e, "O");
+                console.log(activePlayer)
             }
         });
     }
@@ -139,7 +158,7 @@ const gameController = (function() {
 
 
 
-
+    //x always goes first
 
 
 
@@ -149,6 +168,8 @@ const gameController = (function() {
         placeMarkerOnBoard,
         playTurn,
         isNoMoreNumbers,
+        activePlayer
+        
     }
 })();
 
