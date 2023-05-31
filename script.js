@@ -27,29 +27,7 @@ function playerFactory(playerNumber, marker) {
 }
 
 //module ------------------
-const gameController = (function() {
-    // function startingPlayer() {
-    //     if ((Math.floor(Math.random() * 2) + 1) == 1) {
-    //         console.log("player 1 is starting")
-    //         let firstPlayer = 1
-    //         return firstPlayer
-    //     } else {
-    //         console.log("Player 2 is starting")
-    //         let firstPlayer = 2
-    //         return firstPlayer
-    //     }
-    // }
-
-    // function setActivePlayer(firstPlayer) {
-    //     if (firstPlayer === 1) {
-    //         let activePlayer = 1
-    //         return activePlayer
-    //     } else {
-    //         let activePlayer = 2
-    //         return activePlayer
-    //     }
-    // }
-
+const gameController = (function () {
     function switchPlayerTurn() {
         if (activePlayer === 1) {
             activePlayer = 2
@@ -60,7 +38,6 @@ const gameController = (function() {
         }
     }
 
-    // add if there isnt already and o or x there
     function playTurn(location) {
         currentMarker = getCurrentMarker()
         if (activePlayer == 1) {
@@ -69,12 +46,13 @@ const gameController = (function() {
         } else {
             player2.placeMarkerInArray(location)
             gameBoard.squares[location - 1].textContent = currentMarker;
-        }        
+        }
         checkWin()
         switchPlayerTurn()
     }
 
     function getCurrentMarker() {
+        let activeMarker;
         if (activePlayer === 1) {
             activeMarker = "X"
         } else {
@@ -111,55 +89,64 @@ const gameController = (function() {
             ) {
                 console.log(`Player ${activePlayer} Wins`);
                 winner = true;
+                //activeate the modal here
+                deactivateClick()
+                break;
             }
         }
         if ((isNoMoreNumbers() == true) && (winner == false)) {
             console.log("TIE")
+            deactivateClick()
+            //activate the modal here
         }
     }
 
-    //     for (let i = 0; i < winningNumbers.length; i++) {
-    //         let [a, b, c] = winningNumbers[i];
-    //         if (grid[a - 1] === "X" && grid[b - 1] === "X" && grid[c - 1] === "X") {
-    //             console.log("Player 1 wins!");
-    //             winner = true
-    //         }
-    //         else if (grid[a - 1] === "O" && grid[b - 1] === "O" && grid[c - 1] === "O") {
-    //             console.log("Player 2 wins!");
-    //             winner = true
-    //         }
-    //     }
-    //     if ((isNoMoreNumbers() == true) && (winner == false)) {
-    //         console.log("TIE")
+    function placeMarkerOnBoard(e, activeMarker) {
+        if (e.target.textContent !== "X" && e.target.textContent !== "O") {
+            e.target.textContent = activeMarker;
+            playTurn(e.target.classList[1]);
+        }
+    }
+    
+
+    // function activateClick() {
+    //     const squares = gameBoard.squares
+    //     for (let i = 0; i < squares.length; i++) {
+    //         squares[i].addEventListener("click", function (e) {
+    //             if (activePlayer === 1) {
+    //                 placeMarkerOnBoard(e, getCurrentMarker());
+    //             } else {
+    //                 placeMarkerOnBoard(e, getCurrentMarker());
+    //             }
+    //         });
     //     }
     // }
 
-    function placeMarkerOnBoard(e, marker) {
-		if (e.target.textContent !== "X" && e.target.textContent !== "O") {
-			e.target.textContent = marker;
-			playTurn(e.target.classList[1]);
+
+    function activateClick() {
+		const squares = gameBoard.squares;
+		for (let i = 0; i < squares.length; i++) {
+			squares[i].addEventListener("click", functionNamer)
 		}
 	}
 
-    const squares = gameBoard.squares
-    for (let i = 0; i < squares.length; i++) {
-        squares[i].addEventListener("click", function (e) {
-            if (activePlayer === 1) {
-                placeMarkerOnBoard(e, getCurrentMarker());
-            } else {
-                placeMarkerOnBoard(e, getCurrentMarker());
-            }
-        });
+    function functionNamer(e) {
+        placeMarkerOnBoard(e, getCurrentMarker())
     }
 
 
-
+    function deactivateClick() {
+		const squares = gameBoard.squares;
+		for (let i = 0; i < squares.length; i++) {
+			squares[i].removeEventListener("click", functionNamer)
+		}
+	}
 
     let firstPlayer = 1
     let activePlayer = firstPlayer
     let player1 = playerFactory(1, "X")
     let player2 = playerFactory(2, "O")
-
+    activateClick()
 
 
 
@@ -184,7 +171,7 @@ const gameController = (function() {
 
 
 
-
+//need to find out how to activate and deactivate event listeners
 
 
 
