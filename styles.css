@@ -1,18 +1,27 @@
+* {
+    font-family: "Bad Script";
+}
+
 body { 
     display: flex;
     flex-direction: column;
     align-items: center;
+    
+    background-image: url(background.jpg);
+    background-size: cover;
+    background-position: center;
+    margin-top: 100px;
 }
 
 #game-board {
     display: grid;
     grid-template-columns: repeat(3, 200px);
     grid-template-rows: repeat(3, 200px);
-    border: solid black 2px;
+
+
 }
 
 .square {
-    border: solid red 1px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -20,9 +29,39 @@ body {
     font-weight: bold;
 }
 
+#diagonal-line {
+    width: 300%;
+    height: 8px;
+    background-color: black;
+    transform: rotate(-82deg);
+    margin-top: -150%;
+    margin-left: -50%;
+}
+
+#diagonal-line-2 {
+    width: 300%;
+    height: 8px;
+    background-color: black;
+    transform: rotate(-82deg);
+    margin-top: -150%;
+    margin-left: -50%;
+}
+
+#horizontal-line {
+    height: 8px;
+    width: 350%;
+    background-color: black;
+    margin-top: -210%;
+    margin-left: -220%;
+}
+
+#horizontal-line-2 {
+    height: 8px;
+    width: 350%;
+    background-color: black;
+    margin-top: -110%;
+    margin-left: -20%;
+}
 
 
 
-/* player 1 is always x and player 2 is always o */
-/* while there are numbers in the array, play turn */
-/* or while no one has won yet */
