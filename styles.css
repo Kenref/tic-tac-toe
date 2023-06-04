@@ -63,10 +63,6 @@ body {
     margin-left: -20%;
 }
 
-.invisible {
-    /* opacity: 0; */
-}
-
 dialog {
     z-index: 10;
 

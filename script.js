@@ -11,7 +11,11 @@ const gameBoard = (function () {
 			grid[i] = i + 1;
 		}
 		gameController.activateClick();
+		modal.close()
 	}
+
+	let resetButton = document.querySelector("#reset-button")
+	resetButton.addEventListener("click", resetGame)
 
 	return {
 		grid,
@@ -141,6 +145,8 @@ const gameController = (function () {
 		const modal = document.querySelector("#modal")
 		modal.showModal()
 	}
+
+
 
 	// function hideModal() {
 	// 	const modal = document.querySelector("#modal")
