@@ -16,8 +16,11 @@
 <body>
     <h1>Welcome to tic Tac toe</h1>
 
-    <dialog open id="modal">
-        <button class="invisible" id="reset-button">Play again</button>
+    <dialog id="modal">
+        <div id="result-container">
+            <span id="results"></span>
+            <button class="invisible" id="reset-button">Play again?</button>
+        </div>
     </dialog>
     <div id="game-board">
         <div class="square 1"></div>
@@ -34,7 +37,7 @@
         <div id="horizontal-line"></div>
         <div id="horizontal-line-2"></div>
     </div>
-    <div class="invisible" id="game-result">Game result here</div>
+
 
 
 

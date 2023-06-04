@@ -93,6 +93,8 @@ const gameController = (function () {
 				grid[b - 1] === currentMarker &&
 				grid[c - 1] === currentMarker
 			) {
+				let results = document.querySelector("#results")
+				results.textContent = `Player ${activePlayer} Wins!!!`
 				console.log(`Player ${activePlayer} Wins`);
 				winner = true;
 				deactivateClick();
@@ -101,6 +103,8 @@ const gameController = (function () {
 			}
 		}
 		if (isNoMoreNumbers() == true && winner == false) {
+			let results = document.querySelector("#results");
+			results.textContent = "Draw!!!";
 			console.log("TIE");
 			deactivateClick();
 			showModal()

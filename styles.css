@@ -72,11 +72,25 @@ dialog {
 
 }
 
-#reset-button {
-    border: none;
-    background: none;
+#results {
     font-size: 50px;
+    font-weight: bold;
+    width: 30vw;
+    height: 10vh;
+    display: flex;
+    justify-content: center;
+}
+
+#reset-button {
+    background: none;
+    font-size: 20px;
     font-weight: bold;
 }
 
-/* page flip animation - make it delay for 1 second before the book flips the pages */
+#result-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
