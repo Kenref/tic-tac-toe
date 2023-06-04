@@ -63,5 +63,20 @@ body {
     margin-left: -20%;
 }
 
+.invisible {
+    /* opacity: 0; */
+}
 
+dialog {
+    z-index: 10;
 
+}
+
+#reset-button {
+    border: none;
+    background: none;
+    font-size: 50px;
+    font-weight: bold;
+}
+
+/* page flip animation - make it delay for 1 second before the book flips the pages */

@@ -96,12 +96,14 @@ const gameController = (function () {
 				console.log(`Player ${activePlayer} Wins`);
 				winner = true;
 				deactivateClick();
+				showModal()
 				break;
 			}
 		}
 		if (isNoMoreNumbers() == true && winner == false) {
 			console.log("TIE");
 			deactivateClick();
+			showModal()
 		}
 	}
 
@@ -131,6 +133,16 @@ const gameController = (function () {
 		}
 	}
 
+	function showModal() {
+		const modal = document.querySelector("#modal")
+		modal.showModal()
+	}
+
+	// function hideModal() {
+	// 	const modal = document.querySelector("#modal")
+	// 	modal.hideModal()
+	// }
+
 	let firstPlayer = 1;
 	let activePlayer = firstPlayer;
 	let player1 = playerFactory(1, "X");
@@ -146,3 +158,4 @@ const gameController = (function () {
 		activateClick,
 	};
 })();
+		
