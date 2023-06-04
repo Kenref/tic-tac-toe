@@ -1,4 +1,3 @@
-//module -----------------------
 const gameBoard = (function () {
 	"use strict";
 	const squares = document.getElementsByClassName("square");
@@ -11,11 +10,11 @@ const gameBoard = (function () {
 			grid[i] = i + 1;
 		}
 		gameController.activateClick();
-		modal.close()
+		modal.close();
 	}
 
-	let resetButton = document.querySelector("#reset-button")
-	resetButton.addEventListener("click", resetGame)
+	let resetButton = document.querySelector("#reset-button");
+	resetButton.addEventListener("click", resetGame);
 
 	return {
 		grid,
@@ -24,7 +23,6 @@ const gameBoard = (function () {
 	};
 })();
 
-//factory----------------------
 function playerFactory(playerNumber, marker) {
 	function placeMarkerInArray(position) {
 		gameBoard.grid.splice(position - 1, 1, marker);
@@ -36,7 +34,6 @@ function playerFactory(playerNumber, marker) {
 	};
 }
 
-//module ------------------
 const gameController = (function () {
 	function switchPlayerTurn() {
 		if (activePlayer === 1) {
@@ -97,12 +94,12 @@ const gameController = (function () {
 				grid[b - 1] === currentMarker &&
 				grid[c - 1] === currentMarker
 			) {
-				let results = document.querySelector("#results")
-				results.textContent = `Player ${activePlayer} Wins!!!`
+				let results = document.querySelector("#results");
+				results.textContent = `Player ${activePlayer} Wins!!!`;
 				console.log(`Player ${activePlayer} Wins`);
 				winner = true;
 				deactivateClick();
-				showModal()
+				showModal();
 				break;
 			}
 		}
@@ -111,7 +108,7 @@ const gameController = (function () {
 			results.textContent = "Draw!!!";
 			console.log("TIE");
 			deactivateClick();
-			showModal()
+			showModal();
 		}
 	}
 
@@ -142,16 +139,9 @@ const gameController = (function () {
 	}
 
 	function showModal() {
-		const modal = document.querySelector("#modal")
-		modal.showModal()
+		const modal = document.querySelector("#modal");
+		modal.showModal();
 	}
-
-
-
-	// function hideModal() {
-	// 	const modal = document.querySelector("#modal")
-	// 	modal.hideModal()
-	// }
 
 	let firstPlayer = 1;
 	let activePlayer = firstPlayer;
@@ -168,4 +158,3 @@ const gameController = (function () {
 		activateClick,
 	};
 })();
-		
