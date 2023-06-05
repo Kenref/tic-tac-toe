@@ -4,6 +4,7 @@
 <ul>
     <li>Make a rock paper scissors game but everything needs to be contained inside a module/ factory function</li>
     <li>The majority of the program is to be made in JS</li>
+    <li>Game was made playable only on console first before being integrated with DOM</li>
 </ul>
 <br>
 <h2>Languages:</h2>
