@@ -8,11 +8,8 @@
 </ul>
 <br>
 <h2>Languages:</h2>
-<ul>
-    <li>HTML</li>
-    <li>CSS</li>
-    <li>JS</li>
-</ul>
+<img src="https://skillicons.dev/icons?i=js,html,css" alt="JS, HTML and CSS icons">
+
 <br>
 <h2>Challenges</h2>
 <ul>
@@ -22,3 +19,6 @@
     <li>Coming up with an efficient approach to check for winner / draw without the use of "for loops"</li>
 </ul>
 
+<h2>Screenshot:</h2>
+
+![image](https://github.com/Kenref/tic-tac-toe/assets/107287396/5d341674-6765-4e3d-b833-674aba10f0e8)
